@@ -17,6 +17,7 @@
     box-shadow:2px 2px 3px rgba(0, 0, 0, 0.25),-1px -1px 3px rgba(0, 0, 0, 0.25);
     /* background-color: lightblue;  */
         /* animation: loginAnima 1s ease; */ 
+    overflow: hidden;
 }
 .sign h3{ 
     text-align: center;
@@ -26,8 +27,8 @@
     color: #fff;
     margin:-10px -10px 0px -10px;
     margin-bottom: 40px;
-    border-top-left-radius: 3px;  
-    border-top-right-radius: 3px; 
+    /* border-top-left-radius: 3px;  
+    border-top-right-radius: 3px;  */
 }
 .sign form{ 
     margin: 0px auto;
@@ -35,7 +36,7 @@
     font-size: 13px;
     /* transition: all 2s ease; */
 }
-@keyframes loginAnima{
+@keyframes fad{
     /* 0%{opacity: 0.2}
     100%{opacity:1;} */
     0%{padding: 20px;}
@@ -86,9 +87,9 @@
 .show-tier{  
     margin-top: 10px;
     transition: 3s ease;
-    -webkit-animation: loginAnima .5s ease;
-    -moz-animation: loginAnima .5s ease; 
-    animation: loginAnima .5s ease;
+    -webkit-animation: fad .5s ease;
+    -moz-animation: fad .5s ease; 
+    animation: fad .5s ease;
 }
  
 .savin{
