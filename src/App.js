@@ -1,12 +1,11 @@
 import React from 'react'; 
-import './App.css';        
-import Mypagination from './components/pagination/Mypagination';
+import './App.css';         
 
 
 function App(props) { 
     
     return <div>  
-                <Mypagination/>
+                hello
            </div>
 } 
 export default App; 

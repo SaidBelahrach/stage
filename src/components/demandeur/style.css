@@ -1,0 +1,112 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    /* font-family: "Source Sans Pro", sans-serif; */
+    /* font-family: Cochin, Georgia, Times, 'Times New Roman', serif */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.sign{ 
+    margin-top: 20px;
+    /* margin: 0px auto; */
+    margin: 10px 20px;
+    min-width: 250px;
+    max-width: 480px;
+    padding: 10px; 
+    border-radius: 3px;  
+    box-shadow:2px 2px 3px rgba(0, 0, 0, 0.25),-1px -1px 3px rgba(0, 0, 0, 0.25);
+    /* background-color: lightblue;  */
+        /* animation: loginAnima 1s ease; */ 
+}
+.sign h3{ 
+    text-align: center;
+    padding: 8px;
+    height: 30px;
+    background-color:teal;
+    color: #fff;
+    margin:-10px -10px 0px -10px;
+    margin-bottom: 40px;
+    border-top-left-radius: 3px;  
+    border-top-right-radius: 3px; 
+}
+.sign form{ 
+    margin: 0px auto;
+    width: 96%;  
+    font-size: 13px;
+    /* transition: all 2s ease; */
+}
+@keyframes loginAnima{
+    /* 0%{opacity: 0.2}
+    100%{opacity:1;} */
+    0%{padding: 20px;}
+    100%{padding:0px ;}
+}
+
+.sign form  input,.sign form select,.sign form input[type="text"],.sign form textarea{ 
+    padding-left: 5px;
+    margin-top: 5px; 
+    margin-bottom: 15px;
+    width: 98%;
+    height: 35px; 
+    border-radius:4px;
+    border: solid 1px  rgb(46, 127, 231);
+    border-left:solid 3px rgb(46, 127, 231) ; 
+    box-shadow:0px 0px 2px rgba(0, 0, 0, 0.25); 
+}
+.sign form select{   
+    width: 100%;  
+     
+}
+.sign form textarea{ 
+    min-height: 20px;
+    max-height: 160px;
+    resize: vertical;
+}
+
+.sign form option{
+    font-size: 13px; 
+    /* background-color:rgb(225, 228, 225);  */
+    padding-bottom: 10px;  
+}
+.sign form label{
+    font-size: 14px; 
+    cursor: pointer;
+    
+    transition:display 3s ease;
+}
+.sign form input[type="checkbox"]{  
+   width: 16px;
+   height: 16px;
+   margin-right: 5px; 
+   /* margin-bottom: 15px; */
+   cursor: pointer;
+   position: relative;
+     top:3px;
+} 
+.show-tier{  
+    margin-top: 10px;
+    transition: 3s ease;
+    -webkit-animation: loginAnima .5s ease;
+    -moz-animation: loginAnima .5s ease; 
+    animation: loginAnima .5s ease;
+}
+ 
+.savin{
+    text-align: center;
+}
+.sign form input[type="submit"] {  
+   margin: 5px auto;  
+   width: 180px;
+   background-color: teal;
+   border: none;
+   border-radius: 5px;
+   color: whitesmoke;  
+   box-shadow:2px 2px 3px cadetblue; 
+} 
+
+.line{
+       width:60%;
+       margin:2px auto;
+       border: solid 1px #eee;
+       border-radius: 20px;
+}
