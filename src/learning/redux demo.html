@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.5/redux.js"></script>
+<body> 
+<div id="mydiv"></div>
+  
+<script type="text/babel">
+ function TestRedux(props){
+
+
+  //ACTION: describe what u wanna do;describe manipulation of state vars
+        const decrement=()=>{
+            return{type: "INCREMENT"};   //type or name
+        }
+        const increment=()=>{
+            return{type: "DECREMENT"};   //type or name
+        }
+  //REDUCER :describe how ur action change state (check what action is called then...)
+        const counterReducers=(state=0,action)=>{
+            switch(action.type){
+                case "INCREMENT":  return state+1;
+                case "DECREMENT":  return state-1;   
+                default :          return state;
+            }
+        }
+        // let store=createStore(counter);
+          //STORE :global state seprated that holds all data used by the app (and all its component)
+        // import {createStore} from 'redux';
+        let store=Redux.createStore(counterReducers);  //better after creating action
+
+  //DISPACH :execute action and then the store will be updated
+        store.dispach(increment());
+
+        return <h1>hello</h1>;
+ }
+ReactDOM.render(<TestRedux/>, document.getElementById('mydiv'));
+
+</script>
+
+</body>
+</html>

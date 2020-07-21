@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+<body>  
+<div id="mydiv"></div>
+
+<div id="time"></div>
+ 
+<script type="text/babel">
+    function clock(){  
+        const watch=(<h1>time is: {new Date().toLocaleTimeString() } </h1>);
+        ReactDOM.render(watch,document.getElementById("time"));
+    }  setInterval(clock,1000)
+
+    class StateTest extends React.Component{
+        constructor(props){
+            super(props);
+            this.state={nom:"SAID",
+                        age:23,
+                        tel:125478552
+                      };  
+        }
+        changeState =()=>{ 
+            this.setState({nom: "Said Belahrach"});
+        }
+        render(){  
+           return( <div>
+                    <h1>this is {this.state.nom} </h1>
+                    <button onClick={this.changeState }>change name</button>
+                   </div>)
+        }
+    } 
+ReactDOM.render(  <StateTest name="sAid"/>,document.getElementById('mydiv'));  
+</script>
+
+</body>
+</html>

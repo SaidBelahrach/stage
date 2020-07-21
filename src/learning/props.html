@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+<body>
+ 
+      
+<div id="mydiv"></div>
+ 
+<script type="text/babel">
+
+    class ClassComponent extends React.Component {
+            render(){
+                return <div> 
+                             <h1>this is {this.props.name}</h1> 
+                             <h4>{this.props.children}</h4>
+                       </div>
+            }
+    } 
+    var myname="Said Belahrach"
+    ReactDOM.render(
+                    <div>
+                        <ClassComponent name="class Component">
+                                                                <p>this is child 1 </p>
+                                                                <p>this is child 2 </p> 
+                        </ClassComponent>
+                        
+                        <ClassComponent name={myname}/> 
+                    </div>
+                    , document.getElementById('mydiv')); 
+</script>
+
+</body>
+</html>

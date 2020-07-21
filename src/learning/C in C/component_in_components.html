@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+<body>
+ 
+      
+<div id="mydiv"> </div>
+ 
+<script type="text/babel">
+    function Nav(){
+
+        const navItems=["Home","Log in","Sign in","Contact"]; 
+        function toggle(elm){
+             var items=document.getElementById('items');
+            //  if(items.style.display=="none"){
+            //     items.style.display="block"; 
+            //  }else{
+            //     items.style.display="none"; 
+            //  }
+             
+            
+        }
+        return <nav  className="navbar">
+                     <a href="#" id="menu"  onClick={event=>toggle(event.target)}>...</a>
+                     <ul id="items">{navItems.map( (e,i)=><li className="nav-item">{e}</li>)}</ul>
+               </nav>;
+    }
+    
+    function Test() {
+            const [isOn, setIsOn] = React.useState(false); 
+            React.useEffect(() => {
+                //  setInterval(() => console.log('tick'), 1000);
+                console.log("hi");
+            });
+            return (
+                <div>
+                {!isOn && (
+                    <button type="button" onClick={() => setIsOn(true)}>
+                    Start
+                    </button>
+                )}
+            
+                {isOn && (
+                    <button type="button" onClick={() => setIsOn(false)}>
+                    Stop
+                    </button>
+                )}
+                </div>
+            );  
+    }
+
+    function Container(){
+        return <div className="container">
+                   <Test/>
+                   <iframe src="" width="800px" height="400px"> </iframe> 
+                </div>
+    }
+    function Footer(props){
+        return <div className="footer">
+                    <p>All right reseved {props.year}. By {props.author}</p>
+               </div>
+    }
+    function MyApp(){
+        return <div className="MyApp">
+            <Nav />
+            <Container/>
+            <Container/> 
+            <Container/>
+            <Container/>  
+            <Container/> 
+            <Footer year={new Date().getFullYear()} author={"Said Belahrach"}/>
+        </div>
+    }
+    ReactDOM.render(<MyApp/>,document.getElementById('mydiv'));
+</script>
+
+</body>
+</html>
