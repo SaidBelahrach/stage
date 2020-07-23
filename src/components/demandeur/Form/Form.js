@@ -1,5 +1,5 @@
 import React, { useContext, useEffect,useState } from 'react'
-import './style.css'; 
+import './Form.css'; 
 import CustomSelect from './CustomSelect';
 
 export default function Form(props){ 
@@ -10,8 +10,9 @@ export default function Form(props){
      const builders=["Change Builder 1","Change Builder 3","Change Builder 3"]; 
      const testers=["Change tester 1","Change tester 2","Change tester 3"]; 
      const implementers=["Change Implementer 1","Change Implementer 2","Change Implementer 3"];
- 
-    const [deploys, setdeploys] = useState([]);  //{app:"" ,raison:"",description:"",impact:"",tier:""}
+  
+//     const [deployement,setdep]=useState({ N_ref:"",status:"",date:"",app:"",raison:"",descri:"",
+//                                           impact:"",tier:"",builder:"", tester:"", implementer:"", })
     const [app, setapp] = useState(apps[3]);
     const [raison, setraison] = useState("");
     const [descri, setdescri] = useState("");  
@@ -21,21 +22,27 @@ export default function Form(props){
     const [builder, setbuilder] = useState("");
     const [tester, settester] = useState("");
     const [implementer, setimplementer] = useState("");
-    if(localStorage.getItem("deploys")===undefined )  localStorage.setItem("deploys","");
-
-    function handleChange(e){    
-
-    }
+    if(localStorage.getItem("deploys")===undefined )  localStorage.setItem("deploys",""); 
+//     function handleChange(e){   }
  
     function validate(e){  
-         e.preventDefault();  
-         let dep={app,raison,descri,impact,tier}; 
-         let cp=deploys;
-         cp.push(dep);
-         setdeploys(cp);    
-     //     props.setsave(true); 
-    } 
+        if(app.length>0){ 
+               e.preventDefault();  
+               var date=new Date().toLocaleDateString();
+               var N_ref="n1",status="Nouveau";
+               let dep={N_ref,status,date,app,raison,descri,impact,tier,builder,tester,implementer}; 
+               let cp=props.deploys;
+               cp.push(dep);cp.push(dep);cp.push(dep);cp.push(dep);cp.push(dep);cp.push(dep);cp.push(dep);
+               props.setdeploys(cp);    
+               //     console.log(props.deploys);
+
+
+        }
+        
+         
     console.log(builder+" , "+tester+" , "+implementer);
+         props.setsave(true); 
+    } 
      
     return <div className="sign" >
                <h3 className="text-center">New Deployment</h3>

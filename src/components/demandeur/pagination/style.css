@@ -1,0 +1,86 @@
+
+ *{
+     margin: 0px;
+     padding: 0px;
+     font-family: sans-serif;
+     box-sizing: border-box;
+ }
+/*___________________________________________pagination_____________________________________________*/
+.pagina{
+    min-width: 230px;
+    max-width: 500px; 
+    /* border: solid 1px teal; */
+    text-align: center;
+    margin: 5px auto;
+    overflow: auto;
+    
+}
+.pagina div{
+    background-color: aquamarine;
+    max-width: 500px;
+    margin: 5px;
+    min-height: 55px;
+    border-radius: 5px; 
+}
+/* 
+.page .list-group .list-group-item .text-info{
+    max-width: 60px; 
+} */
+
+
+/*_________________________________________pagination table_________________________________________________________ */
+
+.pagina-tab{
+    min-width: 230px;
+    max-width: 1000px; 
+    /* border: solid 1px teal; */
+    text-align: center;
+    margin: 5px auto;
+    overflow: auto;
+    
+}
+.pagina-tab table{
+    /* background-color: aquamarine; */
+    min-width: 360px;
+    width: 99%;
+    margin: 5px;
+    min-height: 55px;
+    border-radius: 5px;  
+    border-collapse: collapse;
+    
+    border:solid 1px gray;
+    
+}
+.pagina-tab table tr:nth-child(even){  
+    background-color: #f2f2f2; 
+}
+.pagina-tab table tr:hover{  
+    background-color: #ddd; 
+}
+.pagina-tab table td{ 
+    /* width: 200px; */ 
+    padding: 8px;
+    /* background-color: lightblue; */
+    border-bottom: solid 1px gray;  
+    word-break: break-all; 
+    border:solid 1px #ddd;
+}
+.pagina-tab table th{  
+    background-color: teal;
+    color: white;
+    padding: 12px 0px;
+    border:solid 1px #ddd;
+    
+}
+
+.current-index{
+    color: white;
+    background-color: teal;
+    border: none;
+}
+.unselected{
+    color: teal;
+    border: solid 1px rgb(99, 197, 236);
+    background-color:white;
+    border-radius: 3px;  
+}
