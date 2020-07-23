@@ -48,7 +48,7 @@
     border-radius: 5px;  
     border-collapse: collapse;
     
-    border:solid 1px gray;
+    /* border:solid 1px gray; */
     
 }
 .pagina-tab table tr:nth-child(even){  
@@ -60,19 +60,27 @@
 .pagina-tab table td{ 
     /* width: 200px; */ 
     padding: 8px;
-    /* background-color: lightblue; */
-    border-bottom: solid 1px gray;  
+    /* background-color: lightblue; */ 
     word-break: break-all; 
-    border:solid 1px #ddd;
+    border:solid 1px #ddd; 
 }
 .pagina-tab table th{  
     background-color: teal;
     color: white;
     padding: 12px 0px;
-    border:solid 1px #ddd;
-    
+    border:solid 1px #ddd; 
 }
-
+.pagina-tab button{
+    width: 45px;
+    background-color: transparent;
+    color: dodgerblue; 
+    border: none; 
+    margin-right:2px ;
+}
+.pagina-tab button:hover{ 
+    border: solid 1px rgb(33, 94, 134); 
+    border-radius: 5px;
+}
 .current-index{
     color: white;
     background-color: teal;

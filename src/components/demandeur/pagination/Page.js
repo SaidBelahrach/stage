@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { Vars } from '../Vars';
 
 export default function Page(props){ 
     const [itms,setItms]=useState([]); //
     const [edit,setedit]=useState(null);
-    const [txt,settxt]=useState("edit");
-
+    const [txt,settxt]=useState("edit"); 
+    const values=useContext(Vars);  
+ 
     const val=props.val; 
     const firstItem=val.currenti*val.nbItmDisp; //first item in table
     useEffect(()=>{  //substracte items to display from data
@@ -29,45 +31,45 @@ export default function Page(props){
         /*update parent data also  */ 
         val.arr[i+firstItem]=e.target.value;   
     }
+    function depEdit(e,i){
+        values.setraison(e.raison);
+        values.setdescri(e.descri);
+        values.setimpact(e.impact);
+        values.defaults[i]=e.app; //selected items in <CustomSelect/>
+        values.defaults[i+1]=e.builder;
+        values.defaults[i+2]=e.tester;
+        values.defaults[i+3]=e.implementer; 
+        
+        values.setedited(i);
+        values.setisEditin(true);
+        props.setsave(false);
+ 
+    }
     return<div className="pagina-tab">
                 <table >
                     <thead >
                         <tr> 
-                           <th>n</th>
+                           <th>N° RFC</th>
                            <th>Name</th>
                            <th>Date</th>
                            <th>Status</th>
-                           <th>edit</th>
-                           {/* <th>Raison</th>
-                           <th>Description</th>
-                           <th>Impacts</th>
-                           <th>Tier</th>
-                           <th>Builder</th>
-                           <th>Modify</th> */}
+                           <th>edit</th> 
                         </tr> 
                     </thead>
                     <tbody>      
                         {itms.map((e,i)=>
                             <tr key={i} > 
-                                    <td>{firstItem+i+1}</td>    
+                                    <td>{e.N_ref}</td>    
                                      <td>{e.app}</td>
                                      <td>{e.date}</td>
-                                     <td>{e.status}</td>
-                                {/*                                    
-                                    <td>{e.raison}</td> 
-                                    <td>{e.descri}</td>  
-                                    <td>{e.impact}</td> 
-                                    <td>{e.tier}</td> 
-                                    <td>{e.builder}</td>  */}
+                                     <td>{e.status}</td> 
                                     <td>
-                                        <button onClick={()=>deleteItem(e,i)} className="btn btn-danger p-0">Delete</button> 
+                                        <button onClick={()=>deleteItem(e,i)}>Delete</button> 
+                                        <button onClick={()=>depEdit(e,i)} hidden={e.status!=="Nouveau"}>Edit</button> 
                                     </td>      
                             </tr> 
                         )}  
                     </tbody>
                 </table> 
           </div>
-
-  
-   
 } 

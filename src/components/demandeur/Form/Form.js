@@ -1,6 +1,7 @@
 import React, { useContext, useEffect,useState } from 'react'
 import './Form.css'; 
 import CustomSelect from './CustomSelect';
+import { Vars } from '../Vars';
 
 export default function Form(props){ 
     useEffect(() => {
@@ -10,38 +11,50 @@ export default function Form(props){
      const builders=["Change Builder 1","Change Builder 3","Change Builder 3"]; 
      const testers=["Change tester 1","Change tester 2","Change tester 3"]; 
      const implementers=["Change Implementer 1","Change Implementer 2","Change Implementer 3"];
-  
-//     const [deployement,setdep]=useState({ N_ref:"",status:"",date:"",app:"",raison:"",descri:"",
-//                                           impact:"",tier:"",builder:"", tester:"", implementer:"", })
-    const [app, setapp] = useState(apps[3]);
-    const [raison, setraison] = useState("");
-    const [descri, setdescri] = useState("");  
-    const [impact, setimpact] = useState(""); 
-    const [isTier, setisTier] = useState(false);
-    const [tier, setTier] = useState("");
-    const [builder, setbuilder] = useState("");
-    const [tester, settester] = useState("");
-    const [implementer, setimplementer] = useState("");
+
     if(localStorage.getItem("deploys")===undefined )  localStorage.setItem("deploys",""); 
 //     function handleChange(e){   }
  
-    function validate(e){  
-        if(app.length>0){ 
-               e.preventDefault();  
+    const val=useContext(Vars);
+    const {deploys, setdeploys,save,setsave,curr,setcurr,app, setapp,raison, setraison,
+           impact, setimpact,tester, isTier, setisTier,tier, setTier,descri,setdescri,
+           builder,setbuilder,settester,implementer, setimplementer,isEditin, setisEditin,
+           edited, setedited ,defaults}= val;  
+  
+    function validate(e){ 
+        e.preventDefault();  
+        if(!isEditin){ 
+              
                var date=new Date().toLocaleDateString();
-               var N_ref="n1",status="Nouveau";
-               let dep={N_ref,status,date,app,raison,descri,impact,tier,builder,tester,implementer}; 
-               let cp=props.deploys;
-               cp.push(dep);cp.push(dep);cp.push(dep);cp.push(dep);cp.push(dep);cp.push(dep);cp.push(dep);
-               props.setdeploys(cp);    
-               //     console.log(props.deploys);
 
+               if(localStorage.getItem('N_ref')==null)  localStorage.setItem('N_ref',0);
+                
+               var N_ref=localStorage.getItem('N_ref') ,status="Nouveau";   
+               N_ref++;
+               localStorage.setItem('N_ref',N_ref);
 
+              let dep= { N_ref,status,date,app,raison,descri,
+                       impact,tier,builder, tester, implementer };
+
+               // let dep={N_ref,status,date,app,raison,descri,impact,tier,builder,tester,implementer}; 
+               
+               let cp=deploys;
+               cp.push(dep); 
+               setdeploys(cp);     
+               props.setsave(true); 
+        }else{
+            let dep=deploys[edited];
+            let N_ref=deploys[edited].N_ref;
+            let date=deploys[edited].date;
+            let status=deploys[edited].status;
+
+            dep={ N_ref,status,date,app,raison,descri,
+            impact,tier,builder, tester, implementer };
+            deploys[edited]=dep;
+            console.log(dep);
+            setisEditin(false); 
+            props.setsave(true); 
         }
-        
-         
-    console.log(builder+" , "+tester+" , "+implementer);
-         props.setsave(true); 
     } 
      
     return <div className="sign" >
@@ -50,7 +63,7 @@ export default function Form(props){
                <form name='f1'onSubmit={validate} > 
                
                     <p >Système ou CI objet du changement:</p> 
-                    <CustomSelect data={apps} setValue={setapp}/>
+                    <CustomSelect data={apps} default={defaults[0]} setValue={setapp}/>
 
                     <p >Raison du changement</p>
                     <input type="text" required value={raison} onChange={(e)=>setraison(e.target.value)} placeholder="Raison du changement"/>
@@ -72,17 +85,17 @@ export default function Form(props){
 
                          <hr className="line"/>
 
-                    Change Builder <CustomSelect data={builders} setValue={setbuilder}/>
+                    Change Builder <CustomSelect data={builders} default={defaults[1]} setValue={setbuilder}/>
                      Entité infra <input type="text"/* value={tier} onChange={(e)=>setTier(e.target.value)}*/ placeholder="Entité infra"/>
                        
                          <hr className="line"/>
 
-                    Change Tester <CustomSelect data={testers}  setValue={settester}/>
+                    Change Tester <CustomSelect data={testers} default={defaults[2]} setValue={settester}/>
                          Entité infra <input type="text"/* value={tier} onChange={(e)=>setTier(e.target.value)}*/ placeholder="Entité infra"/>
                     
                          <hr className="line"/>
                          
-                    Change Implementer <CustomSelect data={implementers}  setValue={setimplementer}/>
+                    Change Implementer <CustomSelect data={implementers} default={defaults[3]} setValue={setimplementer}/>
                          Entité infra <input type="text"/* value={tier} onChange={(e)=>setTier(e.target.value)}*/ placeholder="Entité infra"/>
                     
                     <div className="savin">
