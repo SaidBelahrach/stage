@@ -9,19 +9,22 @@ export default function CustomSelect(props){
 
 
     return  <div className="custom-select "> 
-            <input type="radio" name="option"/> 
-            <span className="placeholder">choisir...</span>
+            <input type="radio" name={data[0]}/> 
+            <span className="placeholder">choisir... <span>&#9660;</span></span>
 
-            <label className="option">
-                <input type="radio" name="option"/>
-                {
-                    data.map((e,i)=><span key={i} className="title" onClick={()=>setValue(e)}>
-                                         {e}
-                                    </span> 
-                    )
-                }
-                
-            </label>
+           
+                    {
+                        data.map((e,i)=>
+                                <label className="option" key={i}>
+                                <input type="radio" name={data[0]} /> 
+                        
+                                        <span className="title" onClick={()=>setValue(e)}>
+                                            {e}
+                                        </span>  
+                                </label>
+                        )
+                    } 
+           
             
         </div>
 
