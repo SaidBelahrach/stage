@@ -1,6 +1,7 @@
 import React, { useContext, useEffect,useState } from 'react'
 import './style.css';
 import Vars from './Vars'
+import CustomSelect from './custom select/CustomSelect';
 
 export default function Form(props){
     const values=useContext(Vars);
@@ -27,31 +28,24 @@ export default function Form(props){
     function handleChange(e){    
 
     }
-
-   
+ 
     function validate(e){  
          e.preventDefault();  
          let dep={app,raison,descri,impact,tier}; 
          let cp=deploys;
          cp.push(dep);
-         setdeploys(cp);  
-         console.log(deploys);
-         
-     //     let json=JSON.stringify(dep)
-     //     localStorage.setItem("deploys",localStorage.getItem("deploys")+","+json);  
-        
-          props.setsave(true); 
+         setdeploys(cp);    
+     //     props.setsave(true); 
     } 
-    
+    console.log(builder+" , "+tester+" , "+implementer);
+     
     return <div className="sign" >
                <h3 className="text-center">New Deployment</h3>
                <p className='err'>{}</p>
                <form name='f1'onSubmit={validate} > 
-                    <p >Système ou CI objet du changement:</p>
-                    <select value={app} onChange={(e)=>setapp(e.target.value)}>
-                              {apps.map((e,i)=><option key={i}>{e}</option>)}
-                    </select>
-                     
+                    <p >Système ou CI objet du changement:</p> 
+                    <CustomSelect data={apps} setValue={setapp}/>
+
                     <p >Raison du changement</p>
                     <input type="text" required value={raison} onChange={(e)=>setraison(e.target.value)} placeholder="Raison du changement"/>
                     
@@ -72,23 +66,17 @@ export default function Form(props){
 
                          <hr className="line"/>
 
-                    Change Builder :<select value={builder} onChange={(e)=>setbuilder(e.target.value)}> 
-                                        {builders.map((e,i)=><option key={i}>{e}</option>)}
-                                    </select>
-                         Entité infra <input type="text"/* value={tier} onChange={(e)=>setTier(e.target.value)}*/ placeholder="Entité infra"/>
+                    Change Builder <CustomSelect data={builders} setValue={setbuilder}/>
+                     Entité infra <input type="text"/* value={tier} onChange={(e)=>setTier(e.target.value)}*/ placeholder="Entité infra"/>
                        
                          <hr className="line"/>
 
-                    Change Tester :<select value={tester} onChange={(e)=>settester(e.target.value)}> 
-                                   {testers.map((e,i)=><option key={i}>{e}</option>)}
-                                   </select>
+                    Change Tester <CustomSelect data={testers}  setValue={settester}/>
                          Entité infra <input type="text"/* value={tier} onChange={(e)=>setTier(e.target.value)}*/ placeholder="Entité infra"/>
                     
                          <hr className="line"/>
                          
-                    Change Implementer :<select value={implementer} onChange={(e)=>setimplementer(e.target.value)}> 
-                                   {implementers.map((e,i)=><option key={i}>{e}</option>)}
-                                   </select>
+                    Change Implementer <CustomSelect data={implementers}  setValue={setimplementer}/>
                          Entité infra <input type="text"/* value={tier} onChange={(e)=>setTier(e.target.value)}*/ placeholder="Entité infra"/>
                     
                     <div className="savin">
