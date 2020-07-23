@@ -9,7 +9,7 @@ export default function CustomSelect(props){
 
     return  <div className="custom-select "> 
             <input type="radio" name={data[0]}/> 
-            <span className="placeholder">choisir... <span>&#9660;</span></span>
+            <span className="placeholder">choisir ... <span>&#9660;</span></span>
                     {
                         data.map((e,i)=>
                                 <label className="option" key={e+i}>
