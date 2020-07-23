@@ -1,8 +1,6 @@
 import React from 'react'; 
 import './App.css';  
-import Form from './components/demandeur/Form';       
-import CustomSelect from './components/demandeur/custom select/CustomSelect';
-
+import Form from './components/demandeur/Form/Form.js';   
 
 function App(props) { 
     

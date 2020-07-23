@@ -1,10 +1,8 @@
 import React, { useContext, useEffect,useState } from 'react'
-import './style.css';
-import Vars from './Vars'
-import CustomSelect from './custom select/CustomSelect';
+import './style.css'; 
+import CustomSelect from './CustomSelect';
 
-export default function Form(props){
-    const values=useContext(Vars);
+export default function Form(props){ 
     useEffect(() => {
          //fetch from API
     },[]);
