@@ -3,11 +3,6 @@ import React, { useState } from "react";
 export const Vars = React.createContext();
 
 export default function Provider(props) {
-  const [state, setState] = useState({
-    deploys: [],
-    app: "",
-    raison: "",
-  });
   const [deploys, setdeploys] = useState([]); //array of deployements
   const [app, setapp] = useState("said");
   const [raison, setraison] = useState("");
@@ -25,8 +20,6 @@ export default function Provider(props) {
   return (
     <Vars.Provider
       value={{
-        state,
-        setState,
         deploys,
         setdeploys,
         app,
