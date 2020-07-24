@@ -9,7 +9,7 @@ export default function Page(props){
     useEffect(()=>{  //substracte the items to display from data
         const r=[...val.arr].splice(firstItem,val.nbItmDisp); 
         setItms( r) ;  
-    },[val.arr,val.currenti])
+    },[val.arr,val.currenti]) 
        
     function deleteItem(e,i){ 
         if(window.confirm('are u sure u wanna delete this item?')){
@@ -20,8 +20,7 @@ export default function Page(props){
                 setItms( r)
                 val.setdataLen(val.arr.length)  
         } 
-    }  
-    // function handlin(e,i){      }
+    }   
     function depEdit(e,i){
         //put data in its fields to modify it
         values.setraison(e.raison);
@@ -37,6 +36,10 @@ export default function Page(props){
         props.setsave(false);               //disp form and hide deplys list
  
     }
+    function depInfo(e){
+        val.setswitcher(true); //disp deployements info
+        val.setstatus(e.status)
+    }
     return<div className="pagina-tab">
                 <table >
                     <thead >
@@ -50,7 +53,7 @@ export default function Page(props){
                     </thead>
                     <tbody>      
                         {itms.map((e,i)=>
-                            <tr key={i} > 
+                            <tr key={i}  style={{cursor:"pointer"}} onClick={()=>depInfo(e)}> 
                                     <td>{e.N_ref}</td>    
                                     <td>{e.app}</td>
                                     <td>{e.date}</td>

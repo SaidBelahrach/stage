@@ -7,20 +7,14 @@ import Provider from './components/demandeur/Vars';
 function App(props) {  
     const [save,setsave]=useState(false);  //disp form or list of deployements
      
-    return <div>    
-            <Provider>
+    return <Provider>
                   {!save?  <Form setsave={setsave}/>
-                    :<div>
-                        <button onClick={()=>setsave(false)} style={{width:"50px"}}> New{/*&#10094;*/ }</button>
+                    :<div> 
                         <Mypagination setsave={setsave}/> 
-                        </div>
+                    </div>
                          
                   } 
-             </Provider> 
-          
-        
-       
-               
-           </div>
+           </Provider> 
+              
 } 
 export default App; 
