@@ -5,7 +5,7 @@ import Mypagination from './components/demandeur/pagination/Mypagination';
 import Provider from './components/demandeur/Vars';
 
 function App(props) {  
-    const [save,setsave]=useState(false);
+    const [save,setsave]=useState(false);  //disp form or list of deployements
      
     return <div>    
             <Provider>
@@ -14,8 +14,7 @@ function App(props) {
                         <button onClick={()=>setsave(false)} style={{width:"50px"}}> New{/*&#10094;*/ }</button>
                         <Mypagination setsave={setsave}/> 
                         </div>
-                        
-                    
+                         
                   } 
              </Provider> 
           

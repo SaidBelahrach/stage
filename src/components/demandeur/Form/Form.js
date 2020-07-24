@@ -10,46 +10,49 @@ export default function Form(props){
      const apps=["Offres","Payements","Client Space","oncf.ma"] ;
      const builders=["Change Builder 1","Change Builder 3","Change Builder 3"]; 
      const testers=["Change tester 1","Change tester 2","Change tester 3"]; 
-     const implementers=["Change Implementer 1","Change Implementer 2","Change Implementer 3"];
+     const implementers=["Change Implementer 1","Change Implementer 2","Change Implementer 3"]; 
 
-    if(localStorage.getItem("deploys")===undefined )  localStorage.setItem("deploys",""); 
 //     function handleChange(e){   }
  
     const val=useContext(Vars);
-    const {deploys, setdeploys,save,setsave,curr,setcurr,app, setapp,raison, setraison,
-           impact, setimpact,tester, isTier, setisTier,tier, setTier,descri,setdescri,
-           builder,setbuilder,settester,implementer, setimplementer,isEditin, setisEditin,
-           edited, setedited ,defaults}= val;  
+    const   {  deploys, setdeploys,                                                  //see vars descriptions in Vars.js
+               app, setapp,
+               raison, setraison,
+               descri,setdescri,
+               impact, setimpact,
+               demander,setdemander,
+               builder,setbuilder,
+               tester,settester,  
+               implementer, setimplementer,
+               isTier,setisTier,tier, setTier,
+               isEditin, setisEditin,edited, setedited,defaults  }= val;  
   
     function validate(e){ 
-        e.preventDefault();  
-        if(!isEditin){ 
-              
+        e.preventDefault();                                                          //to remove later, i used it just for tests
+        if(!isEditin){                                                               //creating new deployement 
                var date=new Date().toLocaleDateString();
 
-               if(localStorage.getItem('N_ref')==null)  localStorage.setItem('N_ref',0);
-                
+               if(localStorage.getItem('N_ref')==null)  localStorage.setItem('N_ref',0);    //just for testing
                var N_ref=localStorage.getItem('N_ref') ,status="Nouveau";   
                N_ref++;
                localStorage.setItem('N_ref',N_ref);
 
+               setdemander("demandeur de changement");                                 //current user
               let dep= { N_ref,status,date,app,raison,descri,
-                       impact,tier,builder, tester, implementer };
-
-               // let dep={N_ref,status,date,app,raison,descri,impact,tier,builder,tester,implementer}; 
-               
+                         impact,tier,demander,builder, tester, implementer 
+                       }; 
                let cp=deploys;
                cp.push(dep); 
-               setdeploys(cp);     
-               props.setsave(true); 
-        }else{
+               setdeploys(cp);      
+               props.setsave(true);                                                   //display deployements list
+        }else{                                                                        //editing an existing deployment
             let dep=deploys[edited];
             let N_ref=deploys[edited].N_ref;
             let date=deploys[edited].date;
             let status=deploys[edited].status;
 
             dep={ N_ref,status,date,app,raison,descri,
-            impact,tier,builder, tester, implementer };
+            impact,tier,demander,builder, tester, implementer };
             deploys[edited]=dep;
             console.log(dep);
             setisEditin(false); 

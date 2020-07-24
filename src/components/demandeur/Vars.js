@@ -1,30 +1,33 @@
 import React, { useState } from 'react';
- 
-
- 
+  
 export const Vars=React.createContext();
    
-export default function Provider(props) { 
-    const [save,setsave]=useState(false);
-    const [deploys, setdeploys] = useState([]); 
-    const [curr,setcurr]=useState(0)
+export default function Provider(props) {  
+    const [deploys, setdeploys] = useState([]);                             //array of deployements
     const [app, setapp] = useState("said");
     const [raison, setraison] = useState("");
     const [descri, setdescri] = useState("");  
     const [impact, setimpact] = useState(""); 
-    const [isTier, setisTier] = useState(false);
-    const [tier, setTier] = useState("");
-    const [builder, setbuilder] = useState("");
-    const [tester, settester] = useState("");
-    const [implementer, setimplementer] = useState("");
-    const [isEditin, setisEditin] = useState(false);
-    const [edited, setedited] = useState(1111);
-    const [defaults, setdefaults] = useState(["","","",""]);
-    return <Vars.Provider value={ {deploys, setdeploys,save,setsave,curr,setcurr,app, setapp,
-                                    raison, setraison,descri,setdescri,
-                                    impact, setimpact,tester, isTier, setisTier,tier, setTier,
-                                    builder,setbuilder,settester,implementer, setimplementer,
-                                    isEditin, setisEditin,edited, setedited,defaults
+    const [isTier, setisTier] = useState(false);                             //if there a 'tier' or not
+    const [tier, setTier] = useState("");                                    //nom de tier
+    const [demander, setdemander] = useState("demandeur de changement");     //demander fullname
+    const [builder, setbuilder] = useState("");                              //builer fullname
+    const [tester, settester] = useState("");                                //tester fullname
+    const [implementer, setimplementer] = useState("");                      //implementer fullname
+    const [isEditin, setisEditin] = useState(false);                         //tell the form whether to save new depl or save edit
+    const [edited, setedited] = useState();                                  //the index of edited element
+    const [defaults, setdefaults] = useState(["","","",""]);                 //default values of CustomSelect (used when editing itm)
+    return <Vars.Provider value={ { deploys, setdeploys,
+                                    app, setapp,
+                                    raison, setraison,
+                                    descri,setdescri,
+                                    impact, setimpact,
+                                    demander,setdemander,
+                                    builder,setbuilder,
+                                    tester,settester,  
+                                    implementer, setimplementer,
+                                    isTier,setisTier,tier, setTier,
+                                    isEditin, setisEditin,edited, setedited,defaults 
                                 }
                                 }>
                 {props.children}
