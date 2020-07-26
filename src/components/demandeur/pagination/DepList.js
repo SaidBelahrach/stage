@@ -1,44 +1,47 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Vars } from '../Vars';
+import React, { useState, useEffect, useContext } from 'react'; 
+import { Store } from '../../../AppContexts/FormContext';
 
-export default function Page(props){ 
+export default function DepList(props){  //deployements list
     const [itms,setItms]=useState([]);  
-    const values=useContext(Vars);   
-    const val=props.val; 
-    const firstItem=val.currenti*val.nbItmDisp; //first item in table
+    const {vars,setvars } = useContext(Store);  
+    const {pagVar,setpagVar}=props.val; 
+    const {arr,nbItmDisp,currentpg}=pagVar;
+    const firstItem=currentpg*nbItmDisp; //first item in table
     useEffect(()=>{  //substracte the items to display from data
-        const r=[...val.arr].splice(firstItem,val.nbItmDisp); 
-        setItms( r) ;  
-    },[val.arr,val.currenti]) 
+        const r=[...arr].splice(firstItem,nbItmDisp); 
+        setItms( r) ;   
+        
+    },[arr,currentpg]) 
        
-    function deleteItem(e,i){ 
+    function deleteItem(e,i){  
         if(window.confirm('are u sure u wanna delete this item?')){
-                const cp=val.arr; 
+                const cp=arr; 
                 cp.splice(i,1);
-                val.setarr(cp); 
-                const r=[...val.arr].splice(firstItem,val.nbItmDisp);  //reload itms[]
+                setpagVar({...pagVar,arr:cp}); 
+                const r=[...arr].splice(firstItem,nbItmDisp);  //reload itms[]
                 setItms( r)
-                val.setdataLen(val.arr.length)  
+                setpagVar({...pagVar,dataLen:arr.length});  
         } 
     }   
     function depEdit(e,i){
         //put data in its fields to modify it
-        values.setraison(e.raison);
-        values.setdescri(e.descri);
-        values.setimpact(e.impact);
-        values.defaults[i]=e.app;           //selected items in <CustomSelect/>
-        values.defaults[i+1]=e.builder;
-        values.defaults[i+2]=e.tester;
-        values.defaults[i+3]=e.implementer; 
         
-        values.setedited(i);                //the index of edited element
-        values.setisEditin(true);           //tell the form whether to save new depl or save edit
-        props.setsave(false);               //disp form and hide deplys list
- 
+        setvars({...vars,app:e.app});
+        setvars({...vars,raison:e.raison});
+        setvars({...vars,descri:e.descri});
+        setvars({...vars,impact:e.impact});           
+        setvars({...vars,builder:e.builder});
+        setvars({...vars,tester:e.tester});
+        setvars({...vars,implementer:e.implementer}); 
+        
+        setvars({...vars,edited:i});         //the index of edited element
+        setvars({...vars,isEditin:true});    //tell the form whether to save new depl or save edit
+        setvars({...vars,tester:e.tester});  //disp form and hide deplys list 
+        props.setsave(false);    
     }
     function depInfo(e){
-        val.setswitcher(true); //disp deployements info
-        val.setstatus(e.status)
+        setpagVar({...pagVar,switcher:true});  //disp deployements info
+        setpagVar({...pagVar,status:e.status});  
     }
     return<div className="pagina-tab">
                 <table >

@@ -31,7 +31,7 @@
 /*_________________________________________pagination table_________________________________________________________ */
 
 .pagina-tab{
-    min-width: 230px;
+    min-width: 440px;
     max-width: 1000px; 
     /* border: solid 1px teal; */
     text-align: center;
@@ -42,7 +42,7 @@
 .pagina-tab table{
     /* background-color: aquamarine; */
     min-width: 360px;
-    width: 99%;
+    width: 98%;
     margin: 5px;
     min-height: 55px;
     border-radius: 5px;  
@@ -57,18 +57,17 @@
 .pagina-tab table tr:hover{  
     background-color: #ddd; 
 }
-.pagina-tab table td{ 
-    /* width: 200px; */ 
-    padding: 8px;
-    /* background-color: lightblue; */ 
+.pagina-tab table td{  
+    padding: 5px; 
     word-break: break-all; 
     border:solid 1px #ddd; 
 }
 .pagina-tab table th{  
     background-color: teal;
     color: white;
-    padding: 12px 0px;
-    border:solid 1px #ddd; 
+    padding: 5px 0px;
+    border:solid 1px #0c7474;
+    font-size: 13px;
 }
 .pagina-tab button{
     width: 45px;
@@ -81,14 +80,25 @@
     border: solid 1px rgb(33, 94, 134); 
     border-radius: 5px;
 }
-.current-index{
+.paina-btn{
+    width:40px;
+    max-height:40px;
+}
+.selected-index{
     color: white;
-    background-color: teal;
+    background-color: dodgerblue;
     border: none;
+    border-radius: 2px; 
+    width:25px;
+    max-height:40px;
+    margin-right: 1px; 
 }
 .unselected{
     color: teal;
     border: solid 1px rgb(99, 197, 236);
     background-color:white;
-    border-radius: 3px;  
+    border-radius: 2px; 
+    width:25px;
+    max-height:40px; 
+    margin-right: 1px; 
 }

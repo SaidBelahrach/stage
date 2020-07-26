@@ -1,10 +1,7 @@
-import React from 'react'; 
-// import {progressbar} from './js/progressbar.js';
+import React from 'react';  
 import './css/main.css';
 
-export default function ProgressBar(props){ 
-
-
+export default function ProgressBar(props){  
     function initProgressBar() {
         var ProgressBar = {};
         ProgressBar.singleStepAnimation = 1000; //default value
@@ -14,6 +11,7 @@ export default function ProgressBar(props){
         // A utility function to create an element with its style
         var createElement = function (type, className, style, text) {
                     var elem = document.createElement(type);
+                    
                     elem.className = className;
                     for (var prop in style) {
                         elem.style[prop] = style[prop];
@@ -104,10 +102,9 @@ export default function ProgressBar(props){
         return ProgressBar;
     }
     const progressbar= initProgressBar();
-
  
-    var steps= [ 'Nouveau', 'En attente', 'Evaluation','Evaluer', 'Rejeter CM/CAB', 
-                'Realisation', 'Test', 'Implementer', 'attente revue', 'Fermer'   ]
+    // var steps= [ 'Nouveau', 'En attente', 'Evaluation','Evaluer', 'Rejeter CM/CAB', 
+    //             'Realisation', 'Test', 'Implementer', 'attente revue', 'Fermer'   ]
                 
     progressbar.singleStepAnimation = 100; 
     progressbar.init(props.steps, props.current,'progress-bar-wrapper');

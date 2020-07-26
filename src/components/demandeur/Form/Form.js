@@ -1,208 +1,192 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import "./Form.css";
-import CustomSelect from "./CustomSelect";
-import { Vars } from "../Vars";
+import CustomSelect from "./CustomSelect"; 
+import {Store } from "../../../AppContexts/FormContext"; 
 
 export default function Form(props) {
   useEffect(() => {
     //fetch from API
   }, []);
   const apps = ["Offres", "Payements", "Client Space", "oncf.ma"];
-  const builders = ["Change Builder 1", "Change Builder 3", "Change Builder 3"];
-  const testers = ["Change tester 1", "Change tester 2", "Change tester 3"];
-  const implementers = [
-    "Change Implementer 1",
-    "Change Implementer 2",
-    "Change Implementer 3",
-  ];
-
-  //     function handleChange(e){   }
-
-  const val = useContext(Vars);
-  const {
-    state,
-    setState,
-    deploys,
-    setdeploys, //see vars descriptions in Vars.js
-    app,
-    setapp,
-    raison,
-    setraison,
-    descri,
-    setdescri,
-    impact,
-    setimpact,
-    demander,
-    setdemander,
-    builder,
-    setbuilder,
-    tester,
-    settester,
-    implementer,
-    setimplementer,
-    isTier,
-    setisTier,
-    tier,
-    setTier,
-    isEditin,
-    setisEditin,
-    edited,
-    setedited,
-    defaults,
-  } = val;
-
+     
+  const {vars,setvars } = useContext(Store);
+  const{deploys, 
+        app, 
+        raison, 
+        descri, 
+        impact, 
+        isTier,  
+        tier, 
+        demander, 
+        builder, 
+        tester, 
+        implementer,
+        isEditin, 
+        edited
+      }=vars;
   function validate(e) {
     e.preventDefault(); //to remove later, i used it just for tests
-    if (!isEditin) {
-      //creating new deployement
+    if (!isEditin) {  //creating new deployement
       var date = new Date().toLocaleDateString();
 
       if (localStorage.getItem("N_ref") == null)
         localStorage.setItem("N_ref", 0); //just for testing
-      var N_ref = localStorage.getItem("N_ref"),
-        status = "Nouveau";
+      var N_ref = localStorage.getItem("N_ref");
       N_ref++;
+      var status = "Nouveau";
+     
       localStorage.setItem("N_ref", N_ref);
 
-      setdemander("demandeur de changement"); //current user
-      let dep = {
-        N_ref,
-        status,
-        date,
-        app,
-        raison,
-        descri,
-        impact,
-        tier,
-        demander,
-        builder,
-        tester,
-        implementer,
-      };
+      setvars({...vars,demander:"demandeur de changement"}); //current user
+      let dep = {N_ref,status,date,app,raison,descri,impact,
+                 tier,demander,builder,tester,implementer
+                };
       let cp = deploys;
       cp.push(dep);
-      setdeploys(cp);
+      setvars({...vars,deploys:cp});
+      
+      // console.log(deploys);
       props.setsave(true); //display deployements list
-    } else {
-      //editing an existing deployment
+    } else { //editing an existing deployment
       let dep = deploys[edited];
       let N_ref = deploys[edited].N_ref;
       let date = deploys[edited].date;
       let status = deploys[edited].status;
 
-      dep = {
-        N_ref,
-        status,
-        date,
-        app,
-        raison,
-        descri,
-        impact,
-        tier,
-        demander,
-        builder,
-        tester,
-        implementer,
-      };
+      dep = {N_ref,status,date,app,raison,descri,impact,
+        tier,demander,builder,tester,implementer
+       };
       deploys[edited] = dep;
-      console.log(dep);
-      setisEditin(false);
+      // console.log(dep);
+      setvars({...vars,isEditin:false}); 
       props.setsave(true);
     }
-  }
+  } 
 
   return (
     <div className="sign">
       <h3 className="text-center">New Deployment</h3>
       <p className="err">{}</p>
       <form name="f1" onSubmit={validate}>
-        <p>Système ou CI objet du changement:</p>
-        <CustomSelect data={apps} default={defaults[0]} setValue={setapp} />
-        <p>Raison du changement</p>
-        <input
-          type="text"
-          required
-          value={state.raison}
-          onChange={(e) => setState({ ...state, raison: e.target.value })}
-          placeholder="Raison du changement"
-        />
-        <p>Description du changement</p>
-        <textarea
-          required
-          value={descri}
-          onChange={(e) => setdescri(e.target.value)}
-          placeholder="Description du changement"
-        />
-        <p>Impact pour non changement </p>
-        <textarea
-          required
-          value={impact}
-          onChange={(e) => setimpact(e.target.value)}
-          placeholder="Impact pour non changement"
-        />
-        <label>
-          <input
-            type="checkbox"
-            checked={isTier}
-            onChange={(e) => setisTier(e.target.checked)}
-          />
-          L’implémentation du Change requiert l’implication d’un tier?
-        </label>
-        <div
-          className="show-tier"
-          style={{ display: isTier ? "block" : "none" }}
-        >
-          <p>Nom du tier</p>
-          <input
-            type="text"
-            value={tier}
-            onChange={(e) => setTier(e.target.value)}
-            placeholder="Nom de tier"
-          />
+        <div className="row">
+              <div>
+                  <p>Système ou CI objet du changement:</p>
+                  <CustomSelect data={apps} default={"defaults[0]"} vars={vars} setvars={setvars} /> 
+              </div>
+              <div className="after-absolute">
+                  <p>Raison du changement</p>
+                              <input
+                                type="text"
+                                required
+                                value={raison}
+                                onChange={(e) => setvars({ ...vars, raison: e.target.value })}
+                                placeholder="Raison du changement"
+                              /> 
+              </div> 
+        </div>
+        <div className="row">
+              <div>
+                  <p>Description du changement</p>
+                  <textarea
+                            required
+                            value={descri}
+                            onChange={(e) => setvars({ ...vars, descri: e.target.value })}
+                            placeholder="Description du changement"
+                  />
+
+              </div>
+              <div>
+                  <p>Impact pour non changement </p>
+                  <textarea
+                            required
+                            value={impact}
+                            onChange={(e) =>setvars({ ...vars, impact: e.target.value })}
+                            placeholder="Impact pour non changement"
+                  />
+              </div>
+        </div>
+        <div className="row">
+            <label>
+                <input
+                  type="checkbox"
+                  checked={isTier}
+                  onChange={(e) =>setvars({ ...vars, isTier: e.target.value })}
+                />
+                L’implémentation du Change requiert l’implication d’un tier?
+            </label>
+            <div className="show-tier" style={{ display: isTier ? "block" : "none" }} >
+                {/* <p>Nom du tier</p> */}
+                <input
+                  type="text"
+                  value={tier}
+                  onChange={(e) =>setvars({ ...vars, tier: e.target.value })}
+                  placeholder="Nom de tier"
+                />
+            </div>
+        </div>
+       
+        <hr className="line" />
+        <div className="row">
+            <div>
+                  <p>Change Builder</p>
+                  <input 
+                    value={builder}
+                    onChange={(e)=>setvars({ ...vars, builder: e.target.value })}
+                    placeholder="Nom Complet"
+                  />
+            </div>
+            <div>
+                  <p>Entité infra</p>
+                  <input
+                    type="text"
+                    /* value={tier} onChange={(e)=>setTier(e.target.value)}*/ placeholder="Entité infra"
+                  />
+            </div> 
+        </div>  
+        <hr className="line" />
+        <div className="row">
+            <div>
+                  <p>Change Tester</p>
+                  <input 
+                    value={tester}
+                    onChange={(e)=>setvars({ ...vars, tester: e.target.value })}
+                    placeholder="Nom Complet"
+                  />
+            </div>
+            <div>
+                  <p>Entité infra</p>
+                  <input
+                    type="text"
+                    /* value={tier} onChange={(e)=>setTier(e.target.value)}*/ placeholder="Entité infra"
+                  />
+            </div> 
         </div>
         <hr className="line" />
-        Change Builder{" "}
-        <CustomSelect
-          data={builders}
-          default={defaults[1]}
-          setValue={setbuilder}
-        />
-        Entité infra{" "}
-        <input
-          type="text"
-          /* value={tier} onChange={(e)=>setTier(e.target.value)}*/ placeholder="Entité infra"
-        />
-        <hr className="line" />
-        Change Tester{" "}
-        <CustomSelect
-          data={testers}
-          default={defaults[2]}
-          setValue={settester}
-        />
-        Entité infra{" "}
-        <input
-          type="text"
-          /* value={tier} onChange={(e)=>setTier(e.target.value)}*/ placeholder="Entité infra"
-        />
-        <hr className="line" />
-        Change Implementer{" "}
-        <CustomSelect
-          data={implementers}
-          default={defaults[3]}
-          setValue={setimplementer}
-        />
-        Entité infra{" "}
-        <input
-          type="text"
-          /* value={tier} onChange={(e)=>setTier(e.target.value)}*/ placeholder="Entité infra"
-        />
+        <div className="row">
+            <div>
+                  <p>Change Implementer</p>
+                  <input 
+                    value={implementer}
+                    onChange={(e)=>setvars({ ...vars, implementer: e.target.value })}
+                    placeholder="Nom Complet"
+                  />
+            </div>
+            <div>
+                  <p>Entité infra</p>
+                  <input
+                    type="text"
+                    /* value={tier} onChange={(e)=>setTier(e.target.value)}*/ placeholder="Entité infra"
+                  />
+            </div> 
+        </div>
+        
         <div className="savin">
-          <input
-            id="btn"
-            type="submit"
-            onClick={(e) => validate(e)}
-            value="Save"
-          />
+            <input
+              id="btn"
+              type="submit"
+              onClick={(e) => validate(e)}
+              value="Save"
+            />
         </div>
       </form>
     </div>

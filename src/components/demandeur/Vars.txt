@@ -9,7 +9,7 @@ export default function Provider(props) {
     raison: "",
   });
   const [deploys, setdeploys] = useState([]); //array of deployements
-  const [app, setapp] = useState("said");
+  const [app, setapp] = useState("app");
   const [raison, setraison] = useState("");
   const [descri, setdescri] = useState("");
   const [impact, setimpact] = useState("");
