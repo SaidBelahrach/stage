@@ -14,7 +14,9 @@ export default function CustomSelect(props) {
                    onClick={(e)=>setcolla(!collapse)}  readOnly
                    checked={collapse}/>
             <span className="placeholder">
-              choisir ... <span>&#9660;</span>
+                choisir ... 
+                <span hidden={collapse}>&#9660;</span>
+                <span hidden={!collapse}>&#9650;</span>
             </span>
             {data.map((e, i) => (
               <label className="option" key={e + i}>

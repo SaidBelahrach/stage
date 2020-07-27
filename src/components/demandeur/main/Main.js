@@ -1,9 +1,10 @@
 import React, { useState,useContext } from 'react' 
-import  './style.css';  
+import  './main.css';  
 import PaginaBar from './PaginaBar';                                            //navigation bar that contain pages indexes
 import DepList from './DepList';                                                      //page that contains list of deployements                                           
 import ProgressBar from '../progress bar/ProgressBar';
 import { Store } from '../../../AppContexts/FormContext';
+import { useHistory } from 'react-router';
 
 export default function Main(props){  
     const {vars}=useContext(Store); 
@@ -26,9 +27,10 @@ export default function Main(props){
             //   console.log("------clear-------------"); 
         } 
     } 
+    
+    const history=useHistory(); 
     return <div className="page">  
             {!pagVar.switcher? <div>
-                             <button onClick={()=>props.setsave(false)} style={{width:"50px"}}> New{/*&#10094;*/ }</button>
                              <DepList val={{pagVar,setpagVar}}
                                    arr={vars.deploys}
                                   setsave={props.setsave}/>  

@@ -1,5 +1,5 @@
 import React from 'react';  
-import './css/main.css';
+import './css/prograssbar.css';
 
 export default function ProgressBar(props){  
     function initProgressBar() {

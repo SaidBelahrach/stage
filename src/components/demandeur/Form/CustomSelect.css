@@ -62,11 +62,13 @@
 	width: 100%;
 	color: #999;
 	border-top: 0px;
-  }
-  .custom-select > span.placeholder span {
+  } 
+  .custom-select > span.placeholder span{
 	position:absolute;
-	right:20px;
+	top:13px;
+	right:5px;
 	color: black; 
+	font-size: 10px;
   }
   /* .custom-select > span.placeholder::after {
 	  position: absolute;
