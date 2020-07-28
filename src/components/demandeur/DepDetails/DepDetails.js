@@ -1,16 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'; 
 import './depdetails.css'; 
-import { useHistory } from 'react-router';
-import { Store } from '../../../AppContexts/FormContext';
+import { useHistory } from 'react-router'; 
  
 export default function DepDetails(props){
     const history=useHistory();
-    const deploys=[{N_ref:123,app:'oncf.ma',date:"11/11/2021",status:"Nouveau"},
-                                           {N_ref:124,app:'Offres',date:"11/03/2020",status:"En attente"},
-                                           {N_ref:125,app:'Clients',date:"05/08/2019",status:"Rejeter CM/CAB"},
-                                           {N_ref:126,app:'Factures',date:"12/12/2020",status:"Test"}   
-                                          ]
-    const dep=history.location.state;
+    const deploy={N_ref:123,app:'oncf.ma',date:"11/11/2021",status:"Nouveau"};
+    const dep=history.location.state || deploy;
                                           
     return <div className="details">
             <table>
