@@ -53,9 +53,12 @@ export default function DepDetails(props){
             <br/><br/>
             <table>
                 <thead style={{background:"sandybrown"}}>
-                    <th style={{height:'40px'}}>Additional Information </th>
-                    <th>Nom complet </th>
-                    <th>Entité infra </th>
+                  <tr>
+                        <th style={{height:'40px'}}>Additional Information </th>
+                        <th>Nom complet </th>
+                        <th>Entité infra </th>
+                  </tr>
+                    
                 </thead>
                 <tbody>
                     <tr>
