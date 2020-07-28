@@ -62,10 +62,10 @@
 .unselect{    
     opacity: .7;
 }   
-@media (max-width:950px){
-    .navbar nav{
-        /* background-color: teal; */
-        min-width: 363px;
-        max-width: 96%;
+@media (max-width:950px){ 
+    .navbar nav{ 
+        min-width: 366px;
+        max-width: 99%;
+        
     }
 }

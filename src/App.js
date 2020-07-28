@@ -5,16 +5,17 @@ import Main from "./components/demandeur/main/Main";
 import Provider from "./AppContexts/FormContext";
 import Nav from "./components/demandeur/nav/Nav";
 import { Route} from "react-router";
-import { BrowserRouter} from "react-router-dom";
+import { BrowserRouter, Link} from "react-router-dom";
+import DepDetails from "./components/demandeur/DepDetails/DepDetails";
 
-function App(props) {
-  // const [save, setsave] = useState(false); //disp form or list of deployements
-   
+function App(props) { 
   return (
     <Provider>
         <BrowserRouter> 
-            <Nav/>  
-            <Route path='/' exact component={Main}/>
+            <Nav/>   
+            <Link to="dep-details"/>
+            <Route path='/dep-details' component={DepDetails}/> 
+            <Route path='/' exact component={Main}/> 
             <Route path='/new-dep' component={Form}/>
         </BrowserRouter>
     </Provider>

@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import "./CustomSelect.css";
 
-export default function CustomSelect(props) {
-  // const tab=["person 1","person 2","person 3","person 4"];
-  const { vars, setvars ,data} = props;
-  const [collapse,setcolla]=useState(false);
-
+export default function CustomSelect(props) { 
+  const { vars, setvars ,apps} = props.values;
+  const [collapse,setcolla]=useState(false);  
+  
   return (
       <div className="container">
           <div className="custom-select ">
             <input type="radio" 
-                   name={data[0]} 
+                   name={apps[0]} 
                    onClick={(e)=>setcolla(!collapse)}  readOnly
                    checked={collapse}/>
             <span className="placeholder">
@@ -18,12 +17,12 @@ export default function CustomSelect(props) {
                 <span hidden={collapse}>&#9660;</span>
                 <span hidden={!collapse}>&#9650;</span>
             </span>
-            {data.map((e, i) => (
+            {apps.map((e, i) => (
               <label className="option" key={e + i}>
                 <input
                   type="radio"
-                  name={data[0]}
-                  defaultChecked={props.default === e}
+                  name={apps[0]}
+                  defaultChecked={props.default === apps[i]}
                   onClick={(e)=>setcolla(!collapse)} 
                 />
                 <span className="title" onClick={() => setvars({...vars,app:e })}>

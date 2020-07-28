@@ -3,8 +3,7 @@ import { Store } from '../../../AppContexts/FormContext';
 import rmIcon  from '../../../style/icons/remove.svg';
 import editIcon  from '../../../style/icons/edit.svg';
 import { useHistory } from 'react-router';
-
-
+ 
 export default function DepList(props){  //deployements list
     const history=useHistory();
     const [itms,setItms]=useState([]);  
@@ -15,11 +14,16 @@ export default function DepList(props){  //deployements list
     const [asc,setasc]=useState({th:[true,true,true,true]});
 
     useEffect(()=>{  //substracte the items to display from data
-        const r=[...arr].splice(firstItem,nbItmDisp); 
+        let r=[...arr].splice(firstItem,nbItmDisp); 
         setItms( r) ;   
-        
-    },[arr,currentpg])  
+        console.log("firs"+firstItem);
 
+        console.log(r);
+        console.log("nb"+nbItmDisp);
+        
+        
+        
+    },[arr,currentpg,nbItmDisp])   
     function deleteItem(e,i){  
         if(window.confirm('are u sure u wanna delete this item?')){
                 const cp=arr; 
@@ -40,6 +44,7 @@ export default function DepList(props){  //deployements list
                          tester:e.tester,
                          implementer:e.implementer,
                          edited:i,
+                         selectedApp:e.app,
                          isEditin:true,  
         }); 
         history.push('/new-dep')  ;
@@ -48,9 +53,9 @@ export default function DepList(props){  //deployements list
         history.push('/new-dep');
         setvars({...vars,selected:'/new-dep'})
     }
-    function depInfo(e){
-        setpagVar({...pagVar,switcher:true});  //disp deployement info
-        setpagVar({...pagVar,status:e.status});  
+    function depDetails(e){
+        history.push('/dep-details',e);
+        setvars({...vars,selected:'/dep-details'})
     }
     function search(e){
         let filter=e.target.value.toUpperCase();  
@@ -81,15 +86,19 @@ export default function DepList(props){  //deployements list
           rows = table.rows; 
           for (i = 1; i < (rows.length - 1); i++) { 
             shouldSwitch = false; 
-            x = rows[i].getElementsByTagName("TD")[n];
-            y = rows[i + 1].getElementsByTagName("TD")[n]; 
+            if(n===2){ //date
+                x = rows[i].getElementsByTagName("TD")[n].innerHTML.split('/').reverse().join("");
+                y = rows[i + 1].getElementsByTagName("TD")[n].innerHTML.split('/').reverse().join("");
+            }else{    //any string
+                x = rows[i].getElementsByTagName("TD")[n].innerHTML;
+                y = rows[i + 1].getElementsByTagName("TD")[n].innerHTML; }
             if (dir == "asc") {
-              if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) { 
+              if (x.toLowerCase() > y.toLowerCase()) { 
                 shouldSwitch = true;
                 break;
               }
             } else if (dir == "desc") {
-              if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) { 
+              if (x.toLowerCase() < y.toLowerCase()) { 
                 shouldSwitch = true;
                 break;
               }
@@ -107,11 +116,19 @@ export default function DepList(props){  //deployements list
           }
         }
     }
+    console.log(pagVar.nbItmDisp);
+    
     return<div className="pagina-tab">
                 <div>
                     <button id="btn-new-dep" 
                         onClick={new_dep} >New deployement
                     </button>
+                    <select value={pagVar.nbItmDisp} 
+                            onChange={(e)=>setpagVar({...pagVar,nbItmDisp:e.target.value})}>
+                        <option value='5'>5</option>
+                        <option value='10'>10</option>
+                        <option value='15'>15</option>
+                    </select>
                     <label>
                         <input type="text" onChange={(e)=>search(e)}/>
                     </label>
@@ -145,11 +162,11 @@ export default function DepList(props){  //deployements list
                     </thead>
                     <tbody>      
                         {itms.map((e,i)=>
-                            <tr key={i} onClick={()=>depInfo(e)}> 
-                                    <td>{e.N_ref}</td>    
-                                    <td>{e.app}</td>
-                                    <td>{e.date}</td>
-                                    <td><p className={"badge "+e.status.replace(' ','').replace('/','')}>
+                            <tr key={i}>  
+                                    <td onClick={()=>depDetails(e)}>{e.N_ref}</td>    
+                                    <td onClick={()=>depDetails(e)}>{e.app}</td>
+                                    <td onClick={()=>depDetails(e)}>{e.date}</td>
+                                    <td onClick={()=>depDetails(e)}><p className={"badge "+e.status.replace(' ','').replace('/','')}>
                                             {e.status}
                                         </p>
                                     </td> 

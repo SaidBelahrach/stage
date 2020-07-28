@@ -7,7 +7,7 @@
 /*_________________________________________pagination table_________________________________________________________ */
 
 .pagina-tab{
-    min-width: 360px;
+    min-width: 405px;
     max-width: 1000px; 
     /* border: solid 1px teal; */
     text-align: center;
@@ -28,7 +28,7 @@
     opacity: .95;
 }
 #btn-new-dep:active{
-    background-color: rgb(70, 113, 156);
+    background-color: rgb(70, 113, 156); 
 }
 #btn-new-dep::before{
     content: "+";
@@ -45,6 +45,7 @@
     text-align: left;
     display: flex;
     justify-content: space-between;
+    padding-right: px;
 }
 .pagina-tab div label{
     margin-left: 20px;
@@ -68,7 +69,7 @@
     /* background-color: aquamarine; */
     margin: 0px auto;
 
-    min-width: 310px;
+    min-width: 400px;
     width: 98%;
     margin: 5px;
     min-height: 55px;
@@ -86,7 +87,12 @@
     word-break: break-all; 
     border-bottom:solid 1px #ddd; 
     font-size: 12px;
+    cursor: pointer;
 }
+.pagina-tab table td:last-child{  
+    cursor: auto;
+}
+
 .pagina-tab table th{  
     background-color: teal;
     color: white;
@@ -103,7 +109,7 @@
 .pagina-tab table th span{
 	position:absolute;
 	top:8px;
-	right:2px;
+	right:-1px;
 	color: #fff; 
 	font-size: 8px;
   }
@@ -134,9 +140,9 @@
     color: #fff;
     text-shadow: 1px 1px 1px rgb(143, 146, 160);
     /* background-color: red; */
-    display: inline;
+    /* display: inline; */
     border-radius: 16px;
-    padding: 3px;
+    padding: 2px;
 }
 .Nouveau{
     background-color: gray

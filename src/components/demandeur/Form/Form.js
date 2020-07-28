@@ -20,7 +20,8 @@ export default function Form(props) {
         tester, 
         implementer,
         isEditin, 
-        edited
+        edited,
+        selectedApp
       }=vars; 
 
   function validate(e) {
@@ -38,7 +39,7 @@ export default function Form(props) {
                       tier,demander,builder,tester,implementer
                       };
             let cp = deploys;
-            cp.push(dep); cp.push(dep); cp.push(dep); cp.push(dep); cp.push(dep);
+            cp.push(dep); 
             setvars({...vars,deploys:cp});
       } else { //editing an existing deployment
             let dep = deploys[edited];
@@ -53,8 +54,8 @@ export default function Form(props) {
             setvars({...vars,isEditin:false}); 
       }  
       history.push('/') 
-  } 
-
+  }  
+  
   return (
     <div className="sign">
       <h3 className="text-center">New Deployment</h3>
@@ -63,7 +64,7 @@ export default function Form(props) {
         <div className="row">
               <div>
                   <p>Système ou CI objet du changement:</p>
-                  <CustomSelect data={apps} default={"defaults[0]"} vars={vars} setvars={setvars} /> 
+                  <CustomSelect default={selectedApp}  values={{vars,setvars,apps}} /> 
               </div>
               <div className="after-absolute">
                   <p>Raison du changement</p>

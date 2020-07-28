@@ -11,7 +11,7 @@ export default function Main(props){
     const [pagVar,setpagVar]=useState({arr:vars.deploys,                                      /*data to display  */
                                        currentpg:0,
                                        nbBtnDisp:5,                                 
-                                       nbItmDisp:5,                                 //number of items dispayed in every page 
+                                       nbItmDisp:10,                                 //number of items dispayed in every page 
                                        dataLen:0,                                   //data length 
                                        switcher:false,
                                        status:"Test"

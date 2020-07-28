@@ -13,7 +13,7 @@ export default function PaginaBar(props){          //pagination indexing bar
         let nb_de_page=Math.ceil(arr.length/nbItmDisp);  
         settotalBtn(nb_de_page);   
         
-    },[arr.length])      
+    },[arr.length,pagVar.nbItmDisp])      
     
     
     return <div className="" style={{display:"flex",justifyContent:"center"}}>
